@@ -41,33 +41,6 @@ using namespace std;
 class Random
 {
 	public:
-	void random(vector<double>& output, int count)
-	{
-		for (int j = 0; j < count; ++j)
-		{
-			random_device rd;
-    		mt19937 gen(rd());
-    		uniform_real_distribution<> dist(-0.1, 0.01);
-    		output.push_back(dist(gen));
-		}
-	}
-	
-	void random(vector<vector<double>>& output, int columns, int rows)
-	{
-		for (int i = 0; i < columns; ++i)
-		{
-			vector<double> temp;
-			for (int j = 0; j < rows; ++j)
-			{
-				random_device rd;
-	    		mt19937 gen(rd());
-	    		uniform_real_distribution<> dist(-0.1, 0.01);
-	    		temp.push_back(dist(gen));
-			}
-			output.push_back(temp);
-		}
-	}
-
 	void random(vector<double>& h, vector<double>& o, int input, int output)
 	{
 		for (int j = 0; j < output; ++j)
@@ -88,15 +61,15 @@ class Random
 
 	void random(vector<vector<double>>& xh, vector<vector<double>>& hh, vector<vector<double>>& ho, int input, int hidden)
 	{
-		//Wxh = (input,hidden)
-		for (int i = 0; i < input; ++i)
+		//Wxh = (hidden,input)
+		for (int i = 0; i < hidden; ++i)
 		{
 			vector<double> temp;
-			for (int j = 0; j < hidden; ++j)
+			for (int j = 0; j < input; ++j)
 			{
 				random_device rd;
 	    		mt19937 gen(rd());
-	    		uniform_real_distribution<> dist(-0.1, 0.01);
+	    		uniform_real_distribution<> dist(0.1, 0.01);
 	    		temp.push_back(dist(gen));
 			}
 			xh.push_back(temp);
@@ -109,20 +82,20 @@ class Random
 			{
 				random_device rd;
 	    		mt19937 gen(rd());
-	    		uniform_real_distribution<> dist(-0.1, 0.01);
+	    		uniform_real_distribution<> dist(0.1, 0.01);
 	    		temp.push_back(dist(gen));
 			}
 			hh.push_back(temp);
 		}
-		//Who = (input,hidden)
-		for (int i = 0; i < hidden; ++i)
+		//Why = (input,hidden)
+		for (int i = 0; i < input; ++i)
 		{
 			vector<double> temp;
-			for (int j = 0; j < input; ++j)
+			for (int j = 0; j < hidden; ++j)
 			{
 				random_device rd;
 	    		mt19937 gen(rd());
-	    		uniform_real_distribution<> dist(-0.1, 0.01);
+	    		uniform_real_distribution<> dist(0.1, 0.01);
 	    		temp.push_back(dist(gen));
 			}
 			ho.push_back(temp);

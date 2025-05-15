@@ -140,20 +140,27 @@ class Preprocess_Txt
     }
 
     //convert all tokens to one hot values
-    void one_hot_encoding(vector<vector<double>>& output, vector<string>& input)
+    void one_hot_encoding(vector<double>& output, int size, int index)
     {
-        vector<double> temp;
-        for (int i = 0; i < input.size(); ++i)
+        vector<double> v;
+        for (int i = 0; i < size; ++i)
         {
-            for (int j = 0; j < input.size(); ++j)
+            output.push_back(0);    
+        }
+        output.erase(output.begin() + index);
+        output.insert(output.begin() + index,1);
+    }
+    int word2index(vector<string>& v, string str)
+    {
+        int n;
+        for (int i = 0; i < v.size(); ++i)
+        {
+            if (v[i]==str)
             {
-                temp.push_back(0);    
+                n = i + 1;
             }
-            temp.erase(temp.begin() + i);
-            temp.insert(temp.begin() + i,1);
-            output.push_back(temp);
-            temp.clear();
-        }        
+        }
+        return n;
     }
 };
 #endif
