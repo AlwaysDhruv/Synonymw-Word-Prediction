@@ -33,7 +33,7 @@ int main()
     vector<string> target_string;
     vector<vector<double>> input;
     vector<vector<double>> target;
-    ifstream file("E:\\Dhruv\\Vanilla2\\Test.txt");
+    ifstream file("PATH");
     if (file.is_open())
     {
         while (getline(file, line))
