@@ -1,0 +1,12 @@
+iostream
+fstream
+sstream
+string
+vector
+random
+cmath
+algorithm
+iomanip
+windows
+commdlg
+cstdlib
