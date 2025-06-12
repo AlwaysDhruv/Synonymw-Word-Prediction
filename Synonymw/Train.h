@@ -92,19 +92,13 @@ class Model
 				vector<double> hidden_value_output;
 				for (int j = 0; j < xh.size(); ++j)
 				{
-					for (int k = 0; k < xh[0].size(); ++k)
-					{
-						sum += xh[j][k] * input[i][k];
-					}
+					for (int k = 0; k < xh[0].size(); ++k) sum += xh[j][k] * input[i][k];
 					temp.push_back(tanh(sum + h[j]));
 					sum = 0.0;
 				}
 				for (int j = 0; j < hy.size(); ++j)
 				{
-					for (int k = 0; k < hy[0].size(); ++k)
-					{
-						sum += hy[j][k] * temp[k]; 
-					}
+					for (int k = 0; k < hy[0].size(); ++k) sum += hy[j][k] * temp[k];
 					temp1.push_back(sum + y[j]);
 					sum = 0.0;
 				}
@@ -124,19 +118,13 @@ class Model
 				}
 				for (int j = 0; j < loss.size(); ++j)
 				{
-					for (int k = 0; k < temp.size(); ++k)
-					{
-						temp1.push_back(loss[j] * temp[k]);
-					}
+					for (int k = 0; k < temp.size(); ++k) temp1.push_back(loss[j] * temp[k]);
 					why.push_back(temp1);
 					temp1.clear();
 				}
 				for (int j = 0; j < hy[0].size(); ++j)
 				{
-					for (int k = 0; k < hy.size(); ++k)
-					{
-						sum += hy[k][j] * loss[k];
-					}
+					for (int k = 0; k < hy.size(); ++k) sum += hy[k][j] * loss[k];
 					dh.push_back(sum);
 					sum = 0.0;
 				}
@@ -147,10 +135,7 @@ class Model
 				}
 				for (int j = 0; j < dh_raw.size(); ++j)
 				{
-					for (int k = 0; k < input[i].size(); ++k)
-					{
-						temp1.push_back(dh_raw[j] * input[i][k]);
-					}
+					for (int k = 0; k < input[i].size(); ++k) temp1.push_back(dh_raw[j] * input[i][k]);
 					wxh.push_back(temp1);
 					temp1.clear();
 				}
@@ -170,10 +155,7 @@ class Model
 				wxh.clear();
 				hidden_value_output.clear();				
 			}
-			if (epochs % 1000 == 0)
-			{
-				cout << "Training Complete : " << epochs << " Loss : " << losses << endl;
-			}
+			if (epochs % 1000 == 0) cout << "Training Complete : " << epochs << " Loss : " << losses << endl;
 		}		
 	}
 	int predict(vector<double>& input, vector<vector<double>>& xh, vector<vector<double>>& hy, vector<double>& h, vector<double>& y)
@@ -185,28 +167,19 @@ class Model
 		vector<double> final_output;
 		for (int j = 0; j < xh.size(); ++j)
 		{
-			for (int k = 0; k < xh[0].size(); ++k)
-			{
-				sum += xh[j][k] * input[k];
-			}
+			for (int k = 0; k < xh[0].size(); ++k) sum += xh[j][k] * input[k];
 			temp.push_back(tanh(sum + h[j]));
 			sum = 0.0;
 		}
 		for (int j = 0; j < hy.size(); ++j)
 		{
-			for (int k = 0; k < hy[0].size(); ++k)
-			{
-				sum += hy[j][k] * temp[k];
-			}
+			for (int k = 0; k < hy[0].size(); ++k) sum += hy[j][k] * temp[k];
 			temp1.push_back(sum + y[j]);
 			sum = 0.0;
 		}
 		softmax(temp1,final_output);
 		temp1.clear();
-		for (int i = 0; i < final_output.size(); ++i)
-		{
-			temp1.push_back(final_output[i]);
-		}
+		for (int i = 0; i < final_output.size(); ++i) temp1.push_back(final_output[i]);
 		sort(final_output.begin(),final_output.end());
 		for (int i = 0; i < temp1.size(); ++i)
 		{
@@ -218,53 +191,21 @@ class Model
 		}
 		return index;
 	}
-	void show(vector<vector<double>>& v)
-	{
-		for (int i = 0; i < v.size(); ++i)
-		{
-			for (int j = 0; j < v[0].size(); ++j)
-			{
-				cout << v[i][j] << " ";
-			}
-			cout << endl;
-		}
-	}
-	void show(vector<double>& v)
-	{
-		for (int i = 0; i < v.size(); ++i)
-		{
-			cout << v[i] << " ";
-		}
-	}
 	void softmax(vector<double>& input, vector<double> & output) 
 	{
     	double maxVal = *max_element(input.begin(), input.end());
     	double sum = 0.0;
-    	for (double val : input)
-    	{
-        	sum += exp(val - maxVal);
-    	}
-    	for (size_t i = 0; i < input.size(); ++i)
-    	{
-    		output.push_back(exp(input[i] - maxVal) / sum);
-    	}
+    	for (double val : input) sum += exp(val - maxVal);
+    	for (size_t i = 0; i < input.size(); ++i) output.push_back(exp(input[i] - maxVal) / sum);
 	}
 	void updates(vector<vector<double>>& weights, float Learning_Rate, vector<vector<double>>& gradients)
 	{
 		for (int j = 0; j < weights.size(); ++j)
-		{
-			for (int i = 0; i < weights[0].size(); ++i)
-			{
-				weights[j][i] -= Learning_Rate * gradients[j][i]; 
-			}
-		}
+			for (int i = 0; i < weights[0].size(); ++i) weights[j][i] -= Learning_Rate * gradients[j][i];
 	}
 	void updates(vector<double>& biases, float Learning_Rate, vector<double>& gradients)
 	{
-		for (int j = 0; j < biases.size(); ++j)
-		{
-			biases[j] -= Learning_Rate * gradients[j];
-		}
+		for (int j = 0; j < biases.size(); ++j) biases[j] -= Learning_Rate * gradients[j];
 	}
 };
 #endif

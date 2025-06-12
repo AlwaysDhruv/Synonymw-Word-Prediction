@@ -59,23 +59,15 @@ class Preprocess_Txt
     int strlen(string str)
     {
         int ct = 0;
-        for (int i = 0; i < str[i]!='\0'; ++i)
-        {
-            ++ct;
-        }
+        for (int i = 0; i < str[i]!='\0'; ++i) ++ct;
         return ct;
     }
 
     //How Many Space In The Stanza Or Sentence That will Give Space Index Number
     int space_index_no(string str)
     {
-        for (int i = 0; i < strlen(str); ++i)
-        {
-            if(str[i]==' ')
-            {
-                space_index.push_back(i);
-            }
-        }
+        for (int i = 0; i < strlen(str); ++i) 
+            if(str[i]==' ') space_index.push_back(i);
         return 0;
     }
 
@@ -98,16 +90,10 @@ class Preprocess_Txt
                 str[ct] != '-' && str[ct] != '_' && str[ct] != '/' && str[ct] != '\\' &&
                 str[ct] != '@' && str[ct] != '#' && str[ct] != '$' && str[ct] != '%' &&
                 str[ct] != '^' && str[ct] != '&' && str[ct] != '*' && str[ct] != '+' &&
-                str[ct] != '=' && str[ct] != '|' && str[ct] != '~' && str[ct] != '`' && str[ct] != ' ')
-                {
-                    v.push_back(str[j]);
-                }
+                str[ct] != '=' && str[ct] != '|' && str[ct] != '~' && str[ct] != '`' && str[ct] != ' ') v.push_back(str[j]);
                 ++ct;
             }
-            for(char ch : v)
-            {
-                resuly += ch;
-            }
+            for(char ch : v) resuly += ch;
             input.push_back(resuly);
             vocab.push_back(resuly);
             resuly = "";
@@ -122,16 +108,10 @@ class Preprocess_Txt
             str[ct] != '-' && str[ct] != '_' && str[ct] != '/' && str[ct] != '\\' &&
             str[ct] != '@' && str[ct] != '#' && str[ct] != '$' && str[ct] != '%' &&
             str[ct] != '^' && str[ct] != '&' && str[ct] != '*' && str[ct] != '+' &&
-            str[ct] != '=' && str[ct] != '|' && str[ct] != '~' && str[ct] != '`' && str[ct] != ' ')
-            {
-                v.push_back(str[i]);
-            }
+            str[ct] != '=' && str[ct] != '|' && str[ct] != '~' && str[ct] != '`' && str[ct] != ' ') v.push_back(str[i]);
             ++ct;
         }
-        for(char ch : v)
-        {
-            resuly += ch;
-        }
+        for(char ch : v) resuly += ch;
         target.push_back(resuly);
         vocab.push_back(resuly);
         v.clear();
@@ -145,10 +125,7 @@ class Preprocess_Txt
     void one_hot_encoding(vector<double>& output, int size, int index)
     {
         vector<double> v;
-        for (int i = 0; i < size; ++i)
-        {
-            output.push_back(0);    
-        }
+        for (int i = 0; i < size; ++i) output.push_back(0);
         output.erase(output.begin() + index);
         output.insert(output.begin() + index,1);
     }
@@ -156,12 +133,7 @@ class Preprocess_Txt
     {
         int n;
         for (int i = 0; i < v.size(); ++i)
-        {
-            if (v[i]==str)
-            {
-                n = i + 1;
-            }
-        }
+            if (v[i]==str) n = i + 1;
         return n;
     }
 };
