@@ -132,8 +132,7 @@ class Preprocess_Txt
     int word2index(vector<string>& v, string str)
     {
         int n;
-        for (int i = 0; i < v.size(); ++i)
-            if (v[i]==str) n = i + 1;
+        for (int i = 0; i < v.size(); ++i) if (v[i]==str) n = i + 1;
         return n;
     }
 };
