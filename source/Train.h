@@ -1,5 +1,5 @@
 /*
-			Here's a simplified list of all the key RNN formulas, explained in plain terms:
+			Here's a simplified list of taining formulas RNN models , explained in plain terms:
 			
 			### 1. Forward Pass (Making Predictions)
 			**Hidden State Calculation:**
